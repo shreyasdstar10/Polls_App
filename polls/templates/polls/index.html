@@ -1,0 +1,23 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>POLLS</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}">
+</head>
+<body>
+<center>
+<h1>Polls Index</h1>
+
+
+
+    {% for question in questions %}
+
+      <li><a href="{% url 'polls:detail' question.id %}">{{question.question_text}}</a></li>
+
+    {% endfor %}
+
+</center>
+</body>
+</html>

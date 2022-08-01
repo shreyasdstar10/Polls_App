@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Polls:Details</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}">
+</head>
+<body>
+<center>
+{% if error %}
+     {{error}}
+     <li><a href="{% url 'polls:index' %}">Click to see questions</a></li>
+{% else %}
+<form method="post" action="{% url 'polls:vote' question.id %}">
+{% csrf_token %}
+     {{question.question_text}}<br>
+    {% for choice in question.choice_set.all %}
+        <input type="radio" name="vote" value="{{choice.id}}">
+        {{choice.choice_text}}<br>
+
+    {% endfor %}
+<input type="submit" value="Vote here">
+</form>
+{% endif %}
+</center>
+</body>
+</html>
